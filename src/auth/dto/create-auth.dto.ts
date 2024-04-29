@@ -1,5 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class SignUp {
   @IsNotEmpty({ message: 'Firstname is required' })
@@ -18,6 +24,18 @@ export class SignUp {
   @IsString({ message: 'Password must be a string' })
   @MinLength(6, { message: 'Password is too short min 6' })
   hash: string;
+
+  @IsNotEmpty({ message: 'role is required' })
+  @IsNumber({}, { message: 'invalid role' })
+  roleId: number;
+
+  @IsNotEmpty({ message: 'department is required' })
+  @IsNumber({}, { message: 'invalid department' })
+  departmentId: number;
+
+  @IsNotEmpty({ message: 'college is required' })
+  @IsNumber({}, { message: 'invalid college' })
+  collegeId: number;
 }
 export class SignIn {
   @IsNotEmpty({ message: 'Email is required' })

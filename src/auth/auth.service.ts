@@ -21,6 +21,9 @@ export class AuthService {
           hash: passowrd,
           firstname: signupDto.firstname,
           lastname: signupDto.lastname,
+          roleId: signupDto.roleId,
+          departmentId: signupDto.departmentId,
+          collegeId: signupDto.collegeId,
         },
       });
       delete user.hash;

@@ -60,7 +60,45 @@ async function main() {
     },
   });
 
-  console.log({ recipe1, recipe2, test1, test2 });
+  const role1 = await prisma.roles.upsert({
+    where: { name: 'STUDENT' },
+    update: {},
+    create: {
+      name: 'STUDENT',
+    },
+  });
+  const role2 = await prisma.roles.upsert({
+    where: { name: 'FACULTY' },
+    update: {},
+    create: {
+      name: 'FACULTY',
+    },
+  });
+  const dept1 = await prisma.departments.upsert({
+    where: { name: 'ECS' },
+    update: {},
+    create: {
+      name: 'ECS',
+    },
+  });
+  const college1 = await prisma.college.upsert({
+    where: { name: 'SJCET' },
+    update: {},
+    create: {
+      name: 'SJCET',
+    },
+  });
+
+  console.log({
+    recipe1,
+    recipe2,
+    test1,
+    test2,
+    role1,
+    role2,
+    dept1,
+    college1,
+  });
 }
 
 // execute the main function

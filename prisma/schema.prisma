@@ -23,19 +23,62 @@ model Recipe {
   updatedAt    DateTime @updatedAt
 }
 
-model test {
+model Test {
   id        Int      @id @default(autoincrement())
   title     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model user {
+model Roles {
   id        Int      @id @default(autoincrement())
+  name      String   @unique @default("NULL")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      User[]
+}
+
+model Departments {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique @default("NULL")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  department User[]
+}
+
+model College {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @default("NULL")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  college   User[]
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  hash         String
+  email        String        @unique
+  role         Roles?        @relation(fields: [roleId], references: [id])
+  roleId       Int?
+  department   Departments?  @relation(fields: [departmentId], references: [id])
+  departmentId Int?
+  college      College?      @relation(fields: [collegeId], references: [id])
+  collegeId    Int?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  requestForms RequestForm[]
+}
+
+model RequestForm {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
   firstname String
   lastname  String
-  hash      String
-  email     String   @unique
+  email     String
+  message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -9,6 +9,9 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { env } from 'process';
 import { UserModule } from './user/user.module';
+import { DepartmentModule } from './department/department.module';
+import { CollegeModule } from './college/college.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -22,6 +25,9 @@ import { UserModule } from './user/user.module';
       signOptions: { expiresIn: '60m' },
     }),
     UserModule,
+    DepartmentModule,
+    CollegeModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
