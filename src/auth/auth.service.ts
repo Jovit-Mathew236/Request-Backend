@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import * as argon from 'argon2';
 import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Injectable()
@@ -39,7 +40,7 @@ export class AuthService {
     }
   }
 
-  async signin(signinDto: SignIn) {
+  async signin(res: Response, signinDto: SignIn) {
     const user = await this.prisma.user.findUnique({
       where: {
         email: signinDto.email,
@@ -60,6 +61,9 @@ export class AuthService {
       username: user.firstname + ' ' + user.lastname,
     };
     const accessToken = this.jwtService.sign(payload);
+
+    res.cookie('access_token', accessToken);
+
     return {
       access_token: accessToken,
     };

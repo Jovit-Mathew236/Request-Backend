@@ -3,13 +3,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import * as cookieParser from 'cookie-parser';
 
 // Define the bootstrap function
 async function bootstrap() {
   // Create a NestJS application instance by passing the AppModule to the NestFactory
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-
+  app.use(cookieParser());
   // Use DocumentBuilder to create a new Swagger document configuration
   const config = new DocumentBuilder()
     .setTitle('Recipes API') // Set the title of the API
