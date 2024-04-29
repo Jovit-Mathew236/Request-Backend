@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignIn, SignUp } from './dto/create-auth.dto';
+import { AuthGuard } from './guard/auth.guard';
+import { Request } from 'express';
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Controller('auth')
@@ -16,5 +18,13 @@ export class AuthController {
   @Post('signin')
   signin(@Body() signinDto: SignIn) {
     return this.authService.signin(signinDto);
+  }
+
+  @Get('user')
+  @UseGuards(AuthGuard)
+  getusers(@Req() req: Request) {
+    console.log(req['user']);
+
+    return this.authService.getusers();
   }
 }
