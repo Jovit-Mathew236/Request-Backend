@@ -9,6 +9,7 @@ import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   // Create a NestJS application instance by passing the AppModule to the NestFactory
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
   // Use DocumentBuilder to create a new Swagger document configuration
@@ -25,7 +26,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   // Start the application and listen for requests on port 3000
-  await app.listen(3000);
+  await app.listen(8000);
 }
 
 // Call the bootstrap function to start the application
