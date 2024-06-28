@@ -1,18 +1,24 @@
-```markdown
 # Project Name
 
 A brief description of your project.
 
 ## Table of Contents
 
-- [Installation](#installation)
-  - [Using pnpm](#using-pnpm)
-  - [Using npm](#using-npm)
-  - [Using bun](#using-bun)
-- [Setup](#setup)
-  - [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [License](#license)
+- [Project Name](#project-name)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Using pnpm](#using-pnpm)
+    - [Using npm](#using-npm)
+    - [Using bun](#using-bun)
+  - [Setup](#setup)
+    - [Using pnpm](#using-pnpm-1)
+    - [Using npm](#using-npm-1)
+    - [Using bun](#using-bun-1)
+    - [Environment Variables](#environment-variables)
+  - [Running the Application](#running-the-application)
+    - [Using pnpm](#using-pnpm-2)
+    - [Using npm](#using-npm-2)
+    - [Using bun](#using-bun-2)
 
 ## Installation
 
