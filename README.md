@@ -1,10 +1,10 @@
-# Project Name
+# Request
 
-A brief description of your project.
+Request management form for college students and faculties
 
 ## Table of Contents
 
-- [Project Name](#project-name)
+- [Request](#request)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
     - [Using pnpm](#using-pnpm)
