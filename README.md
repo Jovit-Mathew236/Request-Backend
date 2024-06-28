@@ -136,4 +136,11 @@ This command will start your application containerized in Docker.
 
 ---
 
-Feel free to adjust the commands and details based on your specific project requirements and Docker setup. Let me know if you need any further customization!
+:tada: Congratulations! Your application is now running.
+
+Testing the API Endpoint
+To test the API endpoint, use a API management software like Postman or Hoppscotch:
+
+Method: GET
+URL: http://localhost:8000/department
+Make sure your application is running and accessible at http://localhost:8000. Replace /department with the appropriate endpoint path according to your API design.
