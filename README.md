@@ -93,9 +93,9 @@ npm run start:dev
 bun run start:dev
 ```
 
-## License
+<!-- ## License
 
 This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
 ```
 
-Make sure to replace `[Project Name]`, `[Brief description of your project]`, and `[LICENSE_NAME]` with the actual details of your project. If you have a specific license, replace `[LICENSE_NAME]` with its name. If you don't have a license file, you can remove the "License" section.
+Make sure to replace `[Project Name]`, `[Brief description of your project]`, and `[LICENSE_NAME]` with the actual details of your project. If you have a specific license, replace `[LICENSE_NAME]` with its name. If you don't have a license file, you can remove the "License" section. -->
