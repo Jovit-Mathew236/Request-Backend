@@ -1,6 +1,6 @@
 # Request
 
-Request management form for college students and faculties
+Request Management Form for College Students and Faculties
 
 ## Table of Contents
 
@@ -10,15 +10,18 @@ Request management form for college students and faculties
     - [Using pnpm](#using-pnpm)
     - [Using npm](#using-npm)
     - [Using bun](#using-bun)
+    - [Using Docker](#using-docker)
   - [Setup](#setup)
     - [Using pnpm](#using-pnpm-1)
     - [Using npm](#using-npm-1)
     - [Using bun](#using-bun-1)
+    - [Using Docker](#using-docker-1)
     - [Environment Variables](#environment-variables)
   - [Running the Application](#running-the-application)
     - [Using pnpm](#using-pnpm-2)
     - [Using npm](#using-npm-2)
     - [Using bun](#using-bun-2)
+    - [Using Docker](#using-docker-2)
 
 ## Installation
 
@@ -39,6 +42,16 @@ npm install
 ```bash
 bun install
 ```
+
+### Using Docker
+
+To set up the application with Docker, ensure you have Docker installed and running. Use the following command in your project's root directory:
+
+```bash
+docker-compose up
+```
+
+This command will start the PostgreSQL container and any other services defined in your `docker-compose.yml` file.
 
 ## Setup
 
@@ -67,6 +80,18 @@ bun prisma generate
 bun prisma migrate dev --name init
 bun prisma db seed
 ```
+
+### Using Docker
+
+Ensure that your Docker containers are running. You can execute the following commands inside your Docker container:
+
+```bash
+docker exec -it <container_name_or_id> npx prisma generate
+docker exec -it <container_name_or_id> npx prisma migrate dev --name init
+docker exec -it <container_name_or_id> npx prisma db seed
+```
+
+Replace `<container_name_or_id>` with the actual name or ID of your Docker container.
 
 ### Environment Variables
 
@@ -99,9 +124,16 @@ npm run start:dev
 bun run start:dev
 ```
 
-<!-- ## License
+### Using Docker
 
-This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
+To run the application using Docker:
+
+```bash
+docker-compose up app
 ```
 
-Make sure to replace `[Project Name]`, `[Brief description of your project]`, and `[LICENSE_NAME]` with the actual details of your project. If you have a specific license, replace `[LICENSE_NAME]` with its name. If you don't have a license file, you can remove the "License" section. -->
+This command will start your application containerized in Docker.
+
+---
+
+Feel free to adjust the commands and details based on your specific project requirements and Docker setup. Let me know if you need any further customization!
