@@ -1,5 +1,3 @@
-Sure! Here is the complete `README.md` that you can copy and paste directly into your project:
-
 ```markdown
 # Project Name
 
