@@ -91,14 +91,14 @@ export class AuthService {
     return this.prisma.user.findMany();
   }
 
-  async refreshToken(req: Request, res: Response) {
-    const token = req.cookies['refresh_token'];
-    if (!token) {
+  async refreshToken(req: Request) {
+    const { refresh_token } = req.body; // Assuming refresh_token is sent in the request body
+    if (!refresh_token) {
       throw new UnauthorizedException('No refresh token provided');
     }
 
     try {
-      const decoded = await this.jwtService.verifyAsync(token, {
+      const decoded = await this.jwtService.verifyAsync(refresh_token, {
         secret: process.env.JWT_SECRET,
       });
 
@@ -117,14 +117,20 @@ export class AuthService {
       };
 
       const accessToken = this.jwtService.sign(payload);
-      const refreshToken = await this.jwtService.sign(payload, {
+      const newRefreshToken = await this.jwtService.sign(payload, {
         expiresIn: '7d',
       });
 
-      res.cookie('access_token', accessToken);
-      res.cookie('refresh_token', refreshToken);
+      // Set cookies in the HTTP response (if needed)
+      // res.cookie('access_token', accessToken);
+      // res.cookie('refresh_token', newRefreshToken);
 
-      return { access_token: accessToken, refresh_token: refreshToken };
+      return {
+        data: {
+          access_token: accessToken,
+          refresh_token: newRefreshToken,
+        },
+      };
     } catch (error) {
       throw new UnauthorizedException('Invalid refresh token');
     }

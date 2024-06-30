@@ -9,6 +9,7 @@ export class UserService {
   getUsers() {
     return this.prisma.user.findMany();
   }
+
   async getRoleUsers(roleId: number) {
     try {
       const users = await this.prisma.user.findMany({
@@ -29,10 +30,6 @@ export class UserService {
   findAll() {
     return `This action returns all user`;
   }
-
-  // getUsers() {
-  //   return this.prisma.user.findMany();
-  // }
 
   getFacultyUsers() {
     const users = this.prisma.user.findMany({

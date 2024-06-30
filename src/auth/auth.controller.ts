@@ -7,6 +7,7 @@ import {
   UseGuards,
   Req,
   Res,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignIn, SignUp } from './dto/create-auth.dto';
@@ -37,10 +38,18 @@ export class AuthController {
   }
 
   @Post('refresh')
-  refreshTokens(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    return this.authService.refreshToken(req, res);
+  async refreshTokens(@Req() req: Request) {
+    try {
+      const { refresh_token } = req.body; // Assuming refresh_token is sent in the request body
+      if (!refresh_token) {
+        throw new UnauthorizedException('No refresh token provided');
+      }
+
+      const tokens = await this.authService.refreshToken(req); // Call the service method
+
+      return tokens; // Return tokens to the client
+    } catch (error) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
   }
 }
