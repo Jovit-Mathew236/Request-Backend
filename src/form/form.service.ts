@@ -6,14 +6,22 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class FormService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createFormDto: CreateFormDto) {
+  create(createFormDto: CreateFormDto, userID: number) {
     return this.prisma.requestForm.create({
-      data: createFormDto,
+      data: {
+        ...createFormDto,
+        fromId: userID, // Make sure to map userID to the correct field in your database schema
+      },
     });
   }
 
-  findAll() {
-    return this.prisma.requestForm.findMany();
+  findAll(req) {
+    const userId = req['user'].sub;
+    return this.prisma.requestForm.findMany({
+      where: {
+        fromId: userId,
+      },
+    });
   }
 
   findOne(id: number) {

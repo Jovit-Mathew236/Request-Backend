@@ -65,7 +65,9 @@ export class AuthService {
     res.cookie('access_token', accessToken);
 
     return {
-      access_token: accessToken,
+      data: {
+        access_token: accessToken,
+      },
     };
   }
 
