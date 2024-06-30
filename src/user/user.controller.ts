@@ -2,15 +2,15 @@ import {
   Controller,
   Get,
   // Body,
-  // Patch,
+  //  Patch,
   Param,
   Delete,
-  UseGuards,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-// import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
+// import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -22,6 +22,13 @@ export class UserController {
     console.log(req['user']);
 
     return this.userService.getUsers();
+  }
+  @Get('faculty')
+  @UseGuards(AuthGuard)
+  getFacultyUsers(@Req() req: Request) {
+    console.log(req['user']);
+
+    return this.userService.getFacultyUsers();
   }
 
   @Get(':id')

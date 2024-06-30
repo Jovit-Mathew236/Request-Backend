@@ -79,6 +79,7 @@ model RequestForm {
   to        User     @relation("RequestFormTo", fields: [toId], references: [id])
   toId      Int
   email     String
+  title     String
   message   String
   approved  Boolean  @default(false)
   createdAt DateTime @default(now())
