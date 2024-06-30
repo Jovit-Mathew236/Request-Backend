@@ -35,4 +35,12 @@ export class AuthController {
 
     return this.authService.getusers();
   }
+
+  @Post('refresh')
+  refreshTokens(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.authService.refreshToken(req, res);
+  }
 }
