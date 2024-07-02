@@ -1,16 +1,19 @@
-# Use the official PostgreSQL image from Docker Hub
-FROM postgres:13
+FROM node:18-alpine
 
-# Environment variables
-ENV POSTGRES_USER requ
-ENV POSTGRES_PASSWORD 1234
+WORKDIR /usr/src/app
 
-# Copy initialization scripts to the Docker entrypoint directory
-# This is useful for initializing the database with custom scripts
-COPY ./init-scripts/ /docker-entrypoint-initdb.d/
+RUN npm install -g pnpm
 
-# Expose the PostgreSQL port
-EXPOSE 5432
+COPY package.json pnpm-lock.yaml ./
 
-# By default, Docker will run CMD ["postgres"] from the base image
-# This starts PostgreSQL server automatically
+RUN pnpm install
+
+COPY . .
+
+RUN pnpm prisma generate
+
+RUN pnpm run build
+
+USER node
+
+CMD ["pnpm", "run", "start:prod"]

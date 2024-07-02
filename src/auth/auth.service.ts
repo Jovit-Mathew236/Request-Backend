@@ -5,10 +5,11 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+// import { Prisma } from '@prisma/client';
 import * as argon from 'argon2';
 import { Response, Request } from 'express';
 import { SignUp, SignIn } from './dto/create-auth.dto';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class AuthService {
@@ -29,10 +30,7 @@ export class AuthService {
       delete user.hash; // Remove hash from the user object to prevent it from being returned
       return user;
     } catch (e) {
-      if (
-        e instanceof Prisma.PrismaClientKnownRequestError &&
-        e.code === 'P2002'
-      ) {
+      if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
         throw new ForbiddenException('Email already exists');
       }
       throw e;
@@ -51,7 +49,7 @@ export class AuthService {
     }
     const passwordMatch = await argon.verify(user.hash, signinDto.hash);
     if (!passwordMatch) {
-      throw new ForbiddenException('invalid email or password');
+      throw new ForbiddenException('Invalid email or password');
     }
 
     const payload = {

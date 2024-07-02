@@ -1,14 +1,39 @@
+# docker-compose.yml
+
 version: '3.8'
+
 services:
-  postgres:
-    image: postgres:13.5
-    restart: always
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
     environment:
-      - POSTGRES_USER=requ
-      - POSTGRES_PASSWORD=1234
-    volumes:
-      - postgres:/var/lib/postgresql/data
+      DATABASE_URL: 'postgres://requ:1234@postgres:5432/requ'
+      JWT_SECRET: 'my-secret'
+      PORT: 8000
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: requ
+      POSTGRES_USER: requ
+      POSTGRES_PASSWORD: 1234
     ports:
       - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
 volumes:
-  postgres:
+  postgres_data:
+
+networks:
+  backend:
+    driver: bridge
