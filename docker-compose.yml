@@ -1,11 +1,12 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres:13.5
+    build:
+      context: ./postgres # Directory containing the PostgreSQL Dockerfile
     restart: always
     environment:
-      - POSTGRES_USER=requ
-      - POSTGRES_PASSWORD=1234
+      POSTGRES_USER: requ
+      POSTGRES_PASSWORD: 1234
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
