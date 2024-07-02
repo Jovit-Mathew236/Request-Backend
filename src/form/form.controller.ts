@@ -25,10 +25,15 @@ export class FormController {
     return this.formService.create(createFormDto, userID);
   }
 
-  @Get()
+  @Get('send')
   @UseGuards(AuthGuard)
-  findAll(@Req() req: Request) {
-    return this.formService.findAll(req);
+  findAllSend(@Req() req: Request) {
+    return this.formService.findAllSend(req);
+  }
+  @Get('receive')
+  @UseGuards(AuthGuard)
+  findAllReceive(@Req() req: Request) {
+    return this.formService.findAllReceive(req);
   }
 
   // @Get(':id')

@@ -20,15 +20,24 @@ export class UserController {
   @UseGuards(AuthGuard)
   getUsers(@Req() req: Request) {
     console.log(req['user']);
-
-    return this.userService.getUsers();
+    const userId = req['user'].sub;
+    return this.userService.getUsers(userId);
   }
+
   @Get('faculty')
   @UseGuards(AuthGuard)
   getFacultyUsers(@Req() req: Request) {
     console.log(req['user']);
 
     return this.userService.getFacultyUsers();
+  }
+
+  @Get('profile')
+  @UseGuards(AuthGuard)
+  getProfile(@Req() req: Request) {
+    console.log(req['user']);
+    const userId = req['user'].sub;
+    return this.userService.getProfile(userId);
   }
 
   @Get(':id')

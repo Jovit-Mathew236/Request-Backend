@@ -80,6 +80,7 @@ model RequestForm {
   toId      Int
   email     String
   title     String
+  replay    String?
   message   String
   approved  Boolean  @default(false)
   createdAt DateTime @default(now())
