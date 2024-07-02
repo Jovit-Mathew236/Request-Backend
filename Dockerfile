@@ -1,30 +1,16 @@
-# Use official Node.js image with LTS version
-FROM node:lts-alpine
+# Use the official PostgreSQL image from Docker Hub
+FROM postgres:13
 
-# Install PostgreSQL client and dependencies
-RUN apk add --no-cache postgresql-client
+# Environment variables
+ENV POSTGRES_USER requ
+ENV POSTGRES_PASSWORD 1234
 
-# Set working directory
-WORKDIR /app
+# Copy initialization scripts to the Docker entrypoint directory
+# This is useful for initializing the database with custom scripts
+COPY ./init-scripts/ /docker-entrypoint-initdb.d/
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Expose the PostgreSQL port
+EXPOSE 5432
 
-# Install Node.js dependencies
-RUN npm install --production
-
-# Copy application code
-COPY . .
-
-# Environment variables for PostgreSQL
-ENV PGUSER requ
-ENV PGPASSWORD 1234
-ENV PGHOST localhost
-ENV PGPORT 5432
-ENV PGDATABASE mydatabase
-
-# Expose port for Node.js application
-EXPOSE 3000
-
-# Command to run both PostgreSQL and Node.js application
-CMD service postgresql start && npm start
+# By default, Docker will run CMD ["postgres"] from the base image
+# This starts PostgreSQL server automatically

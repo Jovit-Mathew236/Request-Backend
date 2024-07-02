@@ -2,14 +2,14 @@ version: '3.8'
 services:
   postgres:
     build:
-      context: ./postgres # Directory containing the PostgreSQL Dockerfile
+      context: ./postgres # Path to the directory containing the Dockerfile
     restart: always
     environment:
       POSTGRES_USER: requ
       POSTGRES_PASSWORD: 1234
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data # Persist data to a named volume
     ports:
-      - '5432:5432'
+      - '5432:5432' # Map container port 5432 to host port 5432
 volumes:
-  postgres:
+  postgres: # Define a named volume 'postgres' for persisting PostgreSQL data
