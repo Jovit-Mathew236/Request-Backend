@@ -1,28 +1,12 @@
-# Build stage
-FROM node:lts-alpine AS builder
+# Use official PostgreSQL image from Docker Hub
+FROM postgres:13.5
 
-USER node
-WORKDIR /home/node
+# Environment variables for PostgreSQL setup
+ENV POSTGRES_USER requ
+ENV POSTGRES_PASSWORD 1234
 
-COPY package*.json .
-RUN npm ci
+# Expose PostgreSQL default port
+EXPOSE 5432
 
-COPY --chown=node:node . .
-RUN npm run build && npm prune --omit=dev
-
-
-# Final run stage
-FROM node:lts-alpine
-
-ENV NODE_ENV production
-USER node
-WORKDIR /home/node
-
-COPY --from=builder --chown=node:node /home/node/package*.json .
-COPY --from=builder --chown=node:node /home/node/node_modules ./node_modules
-COPY --from=builder --chown=node:node /home/node/dist ./dist
-
-ARG PORT
-EXPOSE ${PORT:-3000}
-
-CMD ["node", "dist/main.js"]
+# Specify volume for persisting PostgreSQL data
+VOLUME /var/lib/postgresql/data
