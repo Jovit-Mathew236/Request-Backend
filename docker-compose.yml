@@ -8,9 +8,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      DATABASE_URL: 'postgres://requ:1234@postgres:5432/requ'
-      JWT_SECRET: 'my-secret'
-      PORT: 8000
+      - .env
     depends_on:
       - migrate
     networks:
@@ -21,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile.migrate
     environment:
-      DATABASE_URL: 'postgres://requ:1234@postgres:5432/requ'
+      - .env
     depends_on:
       - postgres
     networks:
