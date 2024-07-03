@@ -8,7 +8,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      DATABASE_URL: 'postgres://requ:1234@past-margo-sjcet-3bcff00b.koyeb.app:5432/requ'
+      DATABASE_URL: 'postgres://koyeb-adm:k4ZMJcuNePD7@ep-soft-union-a1d89bbn.ap-southeast-1.pg.koyeb.app/koyebdb'
       JWT_SECRET: 'my-secret'
       PORT: 8000
     depends_on:
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile.migrate
     environment:
-      DATABASE_URL: 'postgres://requ:1234@past-margo-sjcet-3bcff00b.koyeb.app:5432/requ'
+      DATABASE_URL: 'postgres://koyeb-adm:k4ZMJcuNePD7@ep-soft-union-a1d89bbn.ap-southeast-1.pg.koyeb.app/koyebdb'
     depends_on:
       - postgres
     networks:
@@ -30,9 +30,9 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_DB: requ
-      POSTGRES_USER: requ
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: koyebdb
+      POSTGRES_USER: koyeb-adm
+      POSTGRES_PASSWORD: k4ZMJcuNePD7
     ports:
       - '5432:5432'
     volumes:
