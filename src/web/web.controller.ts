@@ -24,19 +24,8 @@ export class WebController {
   findAll() {
     return this.webService.findAll();
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.webService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateWebDto: UpdateWebDto) {
-  //   return this.webService.update(+id, updateWebDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.webService.remove(+id);
-  // }
+  @Get()
+  findCount() {
+    return this.webService.findCount();
+  }
 }

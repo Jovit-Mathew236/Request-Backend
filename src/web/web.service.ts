@@ -18,4 +18,7 @@ export class WebService {
       },
     });
   }
+  findCount() {
+    return this.prisma.web.count();
+  }
 }
