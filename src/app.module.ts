@@ -13,6 +13,7 @@ import { DepartmentModule } from './department/department.module';
 import { CollegeModule } from './college/college.module';
 import { RoleModule } from './role/role.module';
 import { FormModule } from './form/form.module';
+import { WebModule } from './web/web.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { FormModule } from './form/form.module';
     CollegeModule,
     RoleModule,
     FormModule,
+    WebModule,
   ],
   controllers: [AppController],
   providers: [AppService],
