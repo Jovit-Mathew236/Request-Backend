@@ -24,7 +24,7 @@ export class WebController {
   findAll() {
     return this.webService.findAll();
   }
-  @Get()
+  @Get('count')
   findCount() {
     return this.webService.findCount();
   }
